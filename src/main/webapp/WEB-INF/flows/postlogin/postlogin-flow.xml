@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+        start-state="checkRelyingParty">
+
+    <on-start>
+        <set name="flowScope.returnUrl" value="externalContext.requestMap.returnUrl"/>
+        <set name="flowScope.idpPrincipal" value="externalContext.requestMap.principal"/>
+        <set name="flowScope.idpAuthenticationMethod" value="externalContext.requestMap.authenticationMethod"/>
+        <set name="flowScope.idpRelyingPartyId" value="externalContext.requestMap.relyingPartyId"/>
+        <set name="flowScope.idpAttributes" value="externalContext.requestMap.attributes"/>
+
+        <!-- idp BasicAttribute is not Serializable, so cannot be stored by SWF
+        <set name="flowScope.idpAttributes" value="externalContext.requestMap.attributes"/> -->
+    </on-start>
+
+    <decision-state id="checkRelyingParty">
+        <if test="idpRelyingPartyId.equals('https://sp.example.org/shibboleth')" then="checkGoogleEntitlement" else="continue"/>
+    </decision-state>
+
+    <decision-state id="checkGoogleEntitlement">
+        <if test="idpAttributes.eduPersonEntitlement.contains('urn:example.org:entitlement:googleapps')"
+            then="continue" else="unauthorized"/>
+    </decision-state>
+
+    <view-state id="checkAccess">
+        <transition on="authorized" to="continue"/>
+        <transition on="unauthorized" to="unauthorized" />
+    </view-state>
+
+    <view-state id="unauthorized" view="unauthorized.jsp"/>
+
+    <end-state id="continue" view="externalRedirect:${flowScope.returnUrl}">
+        <on-entry>
+            <set name="externalContext.sessionMap.checked" value="true"/>
+        </on-entry>
+    </end-state>
+
+</flow>
