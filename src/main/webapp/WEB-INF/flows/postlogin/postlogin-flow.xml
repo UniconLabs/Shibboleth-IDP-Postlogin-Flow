@@ -25,6 +25,11 @@
             then="continue" else="unauthorized"/>
     </decision-state>
 
+    <view-state id="debug" view="debugFlow.jsp">
+        <transition on="unauthorized" to="unauthorized"/>
+        <transition on="continue" to="continue"/>
+    </view-state>
+
     <view-state id="unauthorized" view="unauthorized.jsp"/>
 
     <end-state id="continue" view="externalRedirect:${flowScope.returnUrl}"/>
