@@ -6,6 +6,7 @@
     <p><b>Authentication method: ${idpAuthenticationMethod}</b></p>
     <p><b>Relying Party ID: ${idpRelyingPartyId}</b></p>
     <p><b>IDP Attributes: ${idpAttributes.eduPersonEntitlement}</b></p>
+    <p><b>Calling Session ID: ${idpCallingSessionId}</b></p>
 
     <form method="post">
         <input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}"/>

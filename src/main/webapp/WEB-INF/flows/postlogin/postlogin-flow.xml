@@ -3,13 +3,15 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.springframework.org/schema/webflow
                           http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
-        start-state="checkRelyingParty">
+        start-state="debug">
 
     <on-start>
         <set name="flowScope.returnUrl" value="externalContext.requestMap.returnUrl"/>
         <set name="flowScope.idpPrincipal" value="externalContext.requestMap.principal"/>
         <set name="flowScope.idpAuthenticationMethod" value="externalContext.requestMap.authenticationMethod"/>
         <set name="flowScope.idpRelyingPartyId" value="externalContext.requestMap.relyingPartyId"/>
+        <set name="flowScope.idpCallingContextName" value="externalContext.requestMap.callingContextName"/>
+        <set name="flowScope.idpCallingSessionId" value="externalContext.requestMap.callingSessionId"/>
         <set name="flowScope.idpAttributes" value="externalContext.requestMap.attributes"/>
 
         <!-- idp BasicAttribute is not Serializable, so cannot be stored by SWF
