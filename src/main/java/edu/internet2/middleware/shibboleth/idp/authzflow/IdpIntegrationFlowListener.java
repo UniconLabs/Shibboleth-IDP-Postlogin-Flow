@@ -6,28 +6,51 @@ import org.springframework.webflow.execution.*;
 
 import javax.servlet.ServletContext;
 
+/**
+ * This listener plays a role of an 'IDP communication glue' and implements appropriate callbacks in the flow execution
+ * lifecycle to communicate its processing status back to IDP via IDP's own ServletContext attributes.
+ */
 public class IdpIntegrationFlowListener extends FlowExecutionListenerAdapter {
 
     @Override
-    public void sessionStarted(RequestContext context, FlowSession session) {
-        ServletContext servletContext = (ServletContext) context.getExternalContext().getNativeContext();
-        ServletContext callingContext = servletContext.getContext(session.getScope().getString("idpCallingContextName"));
-        if (callingContext == null) {
-            throw new FlowExecutionException(context.getActiveFlow().getId(), context.getCurrentState().getId(),
-                    "Invalid entry into this flow. Probably used back button on the browser when flow has already ended.");
+    public void stateEntering(RequestContext context, StateDefinition state) throws EnterStateVetoException {
+        //Mark the status of this flow and communicate it with IDP via its ServletContext attribute keyed
+        //by priviously passed IDP's HttpSession ID, so IDP (integretion filter) could make a decision what to do next.
+        String status = null;
+        if ("continue".equals(state.getId())) {
+            status = "POST_LOGIN_FLOW_CONTINUE";
+        } else if ("unauthorized".equals(state.getId())) {
+            status = "POST_LOGIN_FLOW_STOP";
         }
-        synchronized (servletContext) {
-            callingContext.setAttribute(session.getScope().getString("idpCallingSessionId"), "UNAUTHORIZED");
+        if (status == null) {
+            return;
+        }
+        ServletContext servletContext = (ServletContext) context.getExternalContext().getNativeContext();
+        ServletContext callingContext = servletContext.getContext(context.getFlowScope().getString("idpCallingContextName"));
+
+        //Synchronize on the calling ServletContext monitor here, so the calling context could synchronize on the same monitor
+        // and see this update: rules of Java Threads visibility
+        synchronized (callingContext) {
+            callingContext.setAttribute(context.getFlowScope().getString("idpCallingSessionId"), status);
         }
     }
 
     @Override
-    public void sessionEnding(RequestContext context, FlowSession session, String outcome, MutableAttributeMap output) {
-        ServletContext servletContext = (ServletContext) context.getExternalContext().getNativeContext();
-        synchronized (servletContext) {
-            String status = "continue".equals(outcome) ? "AUTHORIZED" : "UNAUTHORIZED";
-            servletContext.getContext(session.getScope().getString("idpCallingContextName"))
-                    .setAttribute(session.getScope().getString("idpCallingSessionId"), status);
+    public void stateEntered(RequestContext context, StateDefinition previousState, StateDefinition newState) {
+        //This is our start state. Mark the status as 'in progress', so the IDP (integration filter) could check
+        // and stop processing if malicios or accidental attempt is made to redirect to IDP in the middle of this flow.
+        if ("checkRelyingParty".equals(newState.getId())) {
+            ServletContext servletContext = (ServletContext) context.getExternalContext().getNativeContext();
+            ServletContext callingContext = servletContext.getContext(context.getFlowScope().getString("idpCallingContextName"));
+            if (callingContext == null) {
+                throw new FlowExecutionException(context.getActiveFlow().getId(), context.getCurrentState().getId(),
+                        "Invalid entry into this flow. Probably used back button on the browser when flow has already ended.");
+            }
+            //Synchronize on the calling ServletContext monitor here, so the calling context could synchronize on the same monitor
+            // and see this update: rules of Java Threads visibility
+            synchronized (callingContext) {
+                callingContext.setAttribute(context.getFlowScope().getString("idpCallingSessionId"), "POST_LOGIN_FLOW_IN_PROGRESS");
+            }
         }
     }
 }
