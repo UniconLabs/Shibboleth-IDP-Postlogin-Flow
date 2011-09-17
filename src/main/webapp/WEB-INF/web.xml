@@ -17,6 +17,6 @@
     
     <servlet-mapping>
         <servlet-name>SpringWebMvcFlow</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/postlogin/*</url-pattern>
     </servlet-mapping>
 </web-app>
