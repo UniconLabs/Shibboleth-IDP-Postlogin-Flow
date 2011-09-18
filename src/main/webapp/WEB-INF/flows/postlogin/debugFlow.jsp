@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Bootstrap, from Twitter</title>
+    <title>IDP Post Login</title>
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -12,7 +12,7 @@
     <![endif]-->
 
     <!-- Styles -->
-    <link href="/plf/styles/bootstrap.css" rel="stylesheet">
+    <link href="/plf/styles/bootstrap-1.1.1.css" rel="stylesheet">
 
     <!-- Fav and touch icons -->
     <link rel="shortcut icon" href="images/favicon.ico">
@@ -22,7 +22,7 @@
     
     
     <!-- Scripts: inc. TableSorter -->
-        <script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
     <script src="http://autobahn.tablesorter.com/jquery.tablesorter.min.js"></script>
     <script src="assets/js/google-code-prettify/prettify.js"></script>
     <script src="assets/js/application.js"></script>
@@ -35,7 +35,7 @@
    	<div class="topbar">
 	    <div class="fill">
 	        <div class="container">
-	            <h2><a>IDP Post Login Flow</a></h2>
+	            <h3><a href="#">IDP Post Login Flow</a></h3>
 	        </div>
 	    </div>
 	</div>
@@ -55,8 +55,10 @@
           						
 		  	<form method="post">
 		        <input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}"/>
-		        <input class="btn primary" type="submit" id="continue" name="_eventId_continue" value="Authorized" />
-		        <input class="btn primary" type="submit" id="unauthorized" name="_eventId_unauthorized" value="Unauthorized" />
+		        <div class="actions">
+                    <input class="btn primary" type="submit" id="continue" name="_eventId_continue" value="Authorized" />
+                    <input class="btn primary" type="submit" id="unauthorized" name="_eventId_unauthorized" value="Unauthorized" />
+                </div>						        
 			</form>
       
 
