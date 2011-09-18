@@ -12,20 +12,16 @@
     <![endif]-->
 
     <!-- Styles -->
-    <link href="/plf/styles/bootstrap-1.1.1.css" rel="stylesheet">
-
-    <!-- Fav and touch icons -->
-    <link rel="shortcut icon" href="images/favicon.ico">
-    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
-    
-    
-    <!-- Scripts: inc. TableSorter -->
-    <script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
-    <script src="http://autobahn.tablesorter.com/jquery.tablesorter.min.js"></script>
-    <script src="assets/js/google-code-prettify/prettify.js"></script>
-    <script src="assets/js/application.js"></script>
+    <link href="/plf/styles/bootstrap-1.3.0.css" rel="stylesheet">
+	<style type="text/css">
+      /* Override some defaults */ 
+      body {
+        padding-top: 60px; /* 40px to make the container go all the way to the bottom of the topbar */
+      }
+      .container > footer p {
+        text-align: center; /* center align it with the container */
+      }
+	</style>
   </head>
 
   <body>

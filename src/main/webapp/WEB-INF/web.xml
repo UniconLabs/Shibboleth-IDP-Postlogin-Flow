@@ -19,4 +19,10 @@
         <servlet-name>SpringWebMvcFlow</servlet-name>
         <url-pattern>/postlogin/*</url-pattern>
     </servlet-mapping>
+	
+	<error-page>
+		<error-code>500</error-code>
+	    <location>/internalError.jsp</location>
+	</error-page>
+
 </web-app>

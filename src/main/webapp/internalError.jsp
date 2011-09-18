@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>IDP Post Login</title>
+    <title>IDP Post Login Error</title>
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -38,9 +38,9 @@
 
     <div class="container">
 
-     	<!-- Example row of columns -->
-	       		<div class="alert-message error">
-	    			<p><strong>You are not authorized to use this application.</strong></p>
+
+	       		<div class="alert-message block-message error">
+	    			<p><strong>We have encountered a server side error. Please try again later.</strong></p>
 				</div>
 
     </div> <!-- /container -->
