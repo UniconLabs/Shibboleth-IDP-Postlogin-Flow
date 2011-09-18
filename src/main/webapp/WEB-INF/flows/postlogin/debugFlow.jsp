@@ -43,17 +43,72 @@
         <h1>Debug View State</h1>
         <p>Shows some data passed from IDP and includes 2 buttons to signal <strong>'unauthorized'</strong> and <strong>'continue'</strong> states</p>
       </div>
-      
-      		<h3>Return URL: <small>${idpData.returnUrl}</small></h3>
+      		
+
+
+			<table id="sortTableExample">
+	          <!-- <thead>
+	            <tr>
+	              <th class="header">
+	                #
+	              </th>
+	              <th class="yellow header headerSortDown">
+	                First Name
+	              </th>
+	              <th class="blue header">
+	                Last Name
+	              </th>
+	              <th class="green header">
+	                Language
+	              </th>
+	            </tr>
+	          </thead> -->
+	          <tbody>
+	            <tr>
+	              <td>
+	                <h3>Return URL:<h3>
+	              </td>
+	              <td>
+	                <strong>${idpData.returnUrl}</strong>
+	              </td>
+	            </tr>
+	            <tr>
+	              <td>
+	                <h3>Relying Party ID:</h3>
+	              </td>
+	              <td>
+	                <strong>${idpData.relyingPartyId}</strong>
+	              </td>
+	            </tr>
+	            <tr>
+	              <td>
+	                <h3>Entitlements:</h3>
+	              </td>
+	              <td>
+	                <strong>${idpData.attributes.eduPersonEntitlement}</strong>
+	              </td>
+	            </tr>
+				<tr>
+	              <td>
+	                <h3>Calling Session ID:</h3>
+	              </td>
+	              <td>
+	                <strong>${idpData.callingSessionId}</strong>
+	              </td>
+	            </tr>
+	          </tbody>
+	        </table>
+      		<!--<h3>Return URL: <small>${idpData.returnUrl}</small></h3>
 			<h3>Relying Party ID: <small>${idpData.relyingPartyId}</small></h3>
 			<h3>Entitelments: <small>${idpData.attributes.eduPersonEntitlement}</small></h3>
-			<h3>Calling Session ID: <small>${idpData.callingSessionId}</small></h3>
+			<h3>Calling Session ID: <small>${idpData.callingSessionId}</small></h3> -->
           						
 		  	<form method="post">
 		        <input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}"/>
 		        <div class="actions">
                     <input class="btn primary" type="submit" id="continue" name="_eventId_continue" value="Authorized" />
-                    <input class="btn primary" type="submit" id="unauthorized" name="_eventId_unauthorized" value="Unauthorized" />
+                    <input class="btn" type="submit" id="unauthorized" name="_eventId_unauthorized" value="Unauthorized" />
+					<input class="btn" type="submit" id="termsOfUse" name="_eventId_termsOfUse" value="Terms of Use" />
                 </div>						        
 			</form>
       

@@ -21,7 +21,10 @@
     <view-state id="debug" view="debugFlow.jsp">
         <transition on="unauthorized" to="unauthorized"/>
         <transition on="continue" to="continue"/>
+		<transition on="termsOfUse" to="termsOfUse"/>
     </view-state>
+	
+	<view-state id="termsOfUse" view="termsOfUse.jsp"/>
 
     <end-state id="unauthorized" view="unauthorized.jsp"/>
 
