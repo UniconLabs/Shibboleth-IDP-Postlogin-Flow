@@ -19,7 +19,7 @@
         <property name="flowExecutor" ref="flowExecutor"/>
     </bean>
 
-    <bean id="idpIntegrationListener" class="edu.internet2.middleware.shibboleth.idp.authzflow.IdpIntegrationFlowListener"/>
+    <bean id="idpIntegrationListener" class="edu.internet2.middleware.shibboleth.idp.postlogin.IdpIntegrationFlowListener"/>
 
 <!-- Executes flows: the entry point into the Spring Web Flow system -->
     <webflow:flow-executor id="flowExecutor">

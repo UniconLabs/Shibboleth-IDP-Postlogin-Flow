@@ -1,4 +1,4 @@
-package edu.internet2.middleware.shibboleth.idp.authzflow;
+package edu.internet2.middleware.shibboleth.idp.postlogin;
 
 import java.util.Date;
 

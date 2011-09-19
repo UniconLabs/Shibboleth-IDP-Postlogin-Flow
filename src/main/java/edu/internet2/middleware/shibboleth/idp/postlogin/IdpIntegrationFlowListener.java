@@ -1,6 +1,5 @@
-package edu.internet2.middleware.shibboleth.idp.authzflow;
+package edu.internet2.middleware.shibboleth.idp.postlogin;
 
-import org.springframework.webflow.core.collection.MutableAttributeMap;
 import org.springframework.webflow.definition.StateDefinition;
 import org.springframework.webflow.execution.*;
 
