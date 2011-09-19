@@ -21,14 +21,26 @@
     <view-state id="debug" view="debugFlow.jsp">
         <transition on="unauthorized" to="unauthorized"/>
         <transition on="continue" to="continue"/>
-		<transition on="termsOfUse" to="termsOfUse"/>
-    </view-state>
-	
-	<view-state id="termsOfUse" view="termsOfUse.jsp">
-        <transition on="termsOfUseAgree" to="continue"/>
-        <transition on="termsOfUseDisagree" to="disagreedWithTermsOfUse"/>
+		<transition on="termsOfUse" to="checkTermsOfUse"/>
     </view-state>
 
+    <decision-state id="checkTermsOfUse">
+        <if test="termsOfUseAgreementService.requiresToActOnAgreement(idpData.principal)" then="termsOfUse"
+            else="continue"/>
+    </decision-state>
+	
+	<view-state id="termsOfUse" view="termsOfUse.jsp">
+        <transition on="termsOfUseAgree" to="recordTermsOfUseAcceptance"/>
+        <transition on="termsOfUseDisagree" to="disagreedWithTermsOfUse">
+            <evaluate expression="termsOfUseAgreementService.rejectAgreement(idpData.principal)"/>
+        </transition>
+    </view-state>
+
+    <action-state id="recordTermsOfUseAcceptance">
+        <evaluate expression="termsOfUseAgreementService.acceptAgreement(idpData.principal)"/>
+        <transition to="continue"/>
+    </action-state>
+    
     <view-state id="disagreedWithTermsOfUse" view="disagreedWithTermsOfUse.jsp">
         <transition on="back" to="termsOfUse"/>
     </view-state>

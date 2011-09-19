@@ -11,5 +11,8 @@
         http://www.springframework.org/schema/util
         http://www.springframework.org/schema/util/spring-util-2.5.xsd">
 
+    <bean id="termsOfUseAgreementService"
+          class="edu.internet2.middleware.shibboleth.idp.postlogin.InMemoryTermsOfUseAgreementService"/>
+
 
 </beans>
