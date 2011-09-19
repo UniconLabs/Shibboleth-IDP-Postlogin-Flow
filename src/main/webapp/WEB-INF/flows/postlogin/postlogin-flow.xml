@@ -24,7 +24,14 @@
 		<transition on="termsOfUse" to="termsOfUse"/>
     </view-state>
 	
-	<view-state id="termsOfUse" view="termsOfUse.jsp"/>
+	<view-state id="termsOfUse" view="termsOfUse.jsp">
+        <transition on="termsOfUseAgree" to="continue"/>
+        <transition on="termsOfUseDisagree" to="disagreedWithTermsOfUse"/>
+    </view-state>
+
+    <view-state id="disagreedWithTermsOfUse" view="disagreedWithTermsOfUse.jsp">
+        <transition on="back" to="termsOfUse"/>
+    </view-state>
 
     <end-state id="unauthorized" view="unauthorized.jsp"/>
 

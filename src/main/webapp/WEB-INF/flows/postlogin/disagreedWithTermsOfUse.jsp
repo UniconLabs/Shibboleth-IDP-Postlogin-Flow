@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Terms of use</title>
+    <title>IDP Post Login</title>
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -38,24 +38,14 @@
 </div>
 
 <div class="container">
-
-    <div class="page-header">
-        <h2>
-            Terms of use
-        </h2>
-    </div>
     <div class="alert-message block-message info">
-        <p>
-            Please take the action of agreeing (or disagreeing) with the terms of use
-        </p>
+        <p><strong>You have disagreed with the Terms of Use. You cannot continue until you do so.</strong></p>
 
         <div class="alert-actions">
             <form method="post">
                 <input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}"/>
-                <input class="btn primary" type="submit" id="termsOfUseAgree" name="_eventId_termsOfUseAgree"
-                       value="Agree"/>
-                <input class="btn" type="submit" id="termsOfUseDisagree" name="_eventId_termsOfUseDisagree"
-                       value="Disagree"/>
+                <input class="btn" type="submit" id="back" name="_eventId_back"
+                       value="&laquo; Go back"/>
             </form>
         </div>
     </div>
