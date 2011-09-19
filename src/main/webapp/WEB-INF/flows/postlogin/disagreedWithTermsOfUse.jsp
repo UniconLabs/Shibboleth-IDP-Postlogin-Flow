@@ -39,7 +39,8 @@
 
 <div class="container">
     <div class="alert-message block-message info">
-        <p><strong>You have disagreed with the Terms of Use. You cannot continue until you do so.</strong></p>
+
+        <p><strong><span class="label important">Important</span>You have disagreed with the Terms of Use. You cannot continue until you do so.</strong></p>
 
         <div class="alert-actions">
             <form method="post">

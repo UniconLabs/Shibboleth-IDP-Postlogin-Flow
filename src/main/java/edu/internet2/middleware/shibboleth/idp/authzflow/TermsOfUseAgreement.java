@@ -10,15 +10,41 @@ import java.util.Date;
  */
 public class TermsOfUseAgreement implements Serializable {
 
-    private Action action = Action.NONE_TAKEN;
-
-    private Date termsAcceptanceDate;
-
-    public void accept
-
-    public static enum Action {
+    private static enum Action {
         AGREED,
         DISAGREED,
         NONE_TAKEN
     }
+
+    private Action action = Action.NONE_TAKEN;
+
+    private Date termsAcceptanceDate;
+
+    private AuthenticatedPrincipal user;
+
+    public TermsOfUseAgreement(AuthenticatedPrincipal user) {
+        this.user = user;
+    }
+
+    public void accept() {
+        this.action = Action.AGREED;
+        this.termsAcceptanceDate = new Date();
+    }
+
+    public void reject() {
+        this.action = Action.DISAGREED;
+        this.termsAcceptanceDate = null;
+    }
+
+    public boolean actionIsNeeded(TermsOfUseAcceptanceExpirationStrategy expirationStrategy) {
+        if(this.termsAcceptanceDate == null) {
+            return true;
+        }
+        if(this.action != Action.AGREED) {
+            return false;
+        }
+        return expirationStrategy.isExpired(this.termsAcceptanceDate);
+    }
+
+
 }

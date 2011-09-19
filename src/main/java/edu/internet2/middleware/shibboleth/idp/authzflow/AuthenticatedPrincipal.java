@@ -1,11 +1,28 @@
 package edu.internet2.middleware.shibboleth.idp.authzflow;
 
+import java.io.Serializable;
+
 /**
- * Created by IntelliJ IDEA.
- * User: dima767
- * Date: 9/19/11
- * Time: 3:13 PM
- * To change this template use File | Settings | File Templates.
+ * Represents an authenticated principal against IDP
+ *
+ * @author Dmitriy Kopylenko
  */
-public class AuthenticatedPrincipal {
+public class AuthenticatedPrincipal implements Serializable {
+
+    private String name;
+
+    private TermsOfUseAgreement termsOfUseAgreement;
+
+    public AuthenticatedPrincipal(String name, TermsOfUseAgreement termsOfUseAgreement) {
+        this.name = name;
+        this.termsOfUseAgreement = termsOfUseAgreement;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public TermsOfUseAgreement getTermsOfUseAgreement() {
+        return termsOfUseAgreement;
+    }
 }
