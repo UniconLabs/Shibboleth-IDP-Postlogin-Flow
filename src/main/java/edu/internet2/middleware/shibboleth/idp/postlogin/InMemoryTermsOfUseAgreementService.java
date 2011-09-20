@@ -17,11 +17,19 @@ public class InMemoryTermsOfUseAgreementService  implements TermsOfUseAgreementS
 
     public InMemoryTermsOfUseAgreementService(TermsOfUseAcceptanceExpirationStrategy expirationStrategy) {
         this.expirationStrategy = expirationStrategy;
-        //Just hardcode for now. Later could externalize to the applicationContext config.
-        //Doesn't make a difference at the moment
+        //Just hardcode. Use the other ctor to parametarize the users Map via applicationContext
         AuthenticatedPrincipal user = new AuthenticatedPrincipal("ip-user");
         users.put("ip-user", user);
+    }
 
+    /**
+     * Used for mocking and testing
+     * @param expirationStrategy
+     * @param users
+     */
+    public InMemoryTermsOfUseAgreementService(TermsOfUseAcceptanceExpirationStrategy expirationStrategy, Map<String, AuthenticatedPrincipal> users) {
+        this.expirationStrategy = expirationStrategy;
+        this.users = users;
     }
 
     @Override

@@ -12,7 +12,20 @@
         http://www.springframework.org/schema/util/spring-util-2.5.xsd">
 
     <bean id="termsOfUseAgreementService"
-          class="edu.internet2.middleware.shibboleth.idp.postlogin.InMemoryTermsOfUseAgreementService"/>
+          class="edu.internet2.middleware.shibboleth.idp.postlogin.InMemoryTermsOfUseAgreementService">
+        <constructor-arg index="0">
+            <bean class="edu.internet2.middleware.shibboleth.idp.postlogin.NeverExpired"/>
+        </constructor-arg>
+        <constructor-arg index="1">
+            <util:map map-class="java.util.concurrent.ConcurrentHashMap">
+                <entry key="ip-user">
+                    <bean class="edu.internet2.middleware.shibboleth.idp.postlogin.AuthenticatedPrincipal">
+                        <constructor-arg value="ip-user"/>
+                    </bean>
+                </entry>
+            </util:map>
+        </constructor-arg>
+    </bean>
 
 
 </beans>

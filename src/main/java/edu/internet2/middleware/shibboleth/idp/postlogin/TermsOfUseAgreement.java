@@ -41,10 +41,8 @@ public class TermsOfUseAgreement implements Serializable {
             return true;
         }
         if(this.action != Action.AGREED) {
-            return false;
+            return true;
         }
         return expirationStrategy.isExpired(this.termsAcceptanceDate);
     }
-
-
 }
