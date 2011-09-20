@@ -20,7 +20,7 @@ public class IdpIntegrationFlowListener extends FlowExecutionListenerAdapter {
         String status = null;
         if ("continue".equals(state.getId())) {
             status = "POST_LOGIN_FLOW_CONTINUE";
-        } else if ("unauthorized".equals(state.getId()) || "termsOfUseDisagree".equals(state.getId())) {
+        } else if ("unauthorized".equals(state.getId()) || "disagreedWithTermsOfUse".equals(state.getId())) {
             status = "POST_LOGIN_FLOW_STOP";
         }
         if (status == null) {
