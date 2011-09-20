@@ -84,11 +84,11 @@
             <element id="library" level="project" name="Maven: aopalliance:aopalliance:1.0" />
             <element id="library" level="project" name="Maven: org.springframework:spring-beans:3.0.6.RELEASE" />
             <element id="library" level="project" name="Maven: org.springframework:spring-expression:3.0.6.RELEASE" />
-            <element id="library" level="project" name="Maven: org.springframework:spring-aspects:3.0.6.RELEASE" />
-            <element id="library" level="project" name="Maven: org.springframework:spring-context-support:3.0.6.RELEASE" />
+            <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:3.0.6.RELEASE" />
             <element id="library" level="project" name="Maven: org.springframework:spring-tx:3.0.6.RELEASE" />
             <element id="library" level="project" name="Maven: org.springframework:spring-web:3.0.6.RELEASE" />
             <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:3.0.6.RELEASE" />
+            <element id="library" level="project" name="Maven: org.springframework:spring-context-support:3.0.6.RELEASE" />
             <element id="library" level="project" name="Maven: commons-digester:commons-digester:2.0" />
             <element id="library" level="project" name="Maven: commons-beanutils:commons-beanutils:1.8.0" />
             <element id="library" level="project" name="Maven: commons-fileupload:commons-fileupload:1.2.1" />
@@ -478,17 +478,6 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-asm/3.0.6.RELEASE/spring-asm-3.0.6.RELEASE-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.springframework:spring-aspects:3.0.6.RELEASE">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aspects/3.0.6.RELEASE/spring-aspects-3.0.6.RELEASE.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aspects/3.0.6.RELEASE/spring-aspects-3.0.6.RELEASE-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aspects/3.0.6.RELEASE/spring-aspects-3.0.6.RELEASE-sources.jar!/" />
-      </SOURCES>
-    </library>
     <library name="Maven: org.springframework:spring-beans:3.0.6.RELEASE">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-beans/3.0.6.RELEASE/spring-beans-3.0.6.RELEASE.jar!/" />
@@ -542,6 +531,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-expression/3.0.6.RELEASE/spring-expression-3.0.6.RELEASE-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.springframework:spring-jdbc:3.0.6.RELEASE">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-jdbc/3.0.6.RELEASE/spring-jdbc-3.0.6.RELEASE.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-jdbc/3.0.6.RELEASE/spring-jdbc-3.0.6.RELEASE-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-jdbc/3.0.6.RELEASE/spring-jdbc-3.0.6.RELEASE-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.springframework:spring-test:3.0.6.RELEASE">
