@@ -61,6 +61,11 @@
     <dependencies>
         <!-- General dependencies for standard applications -->
         <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.0</version>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.8.2</version>
@@ -224,11 +229,6 @@
             <version>1.0</version>
             <scope>provided</scope>
             <classifier/>
-        </dependency>
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>1.6</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet.jsp</groupId>

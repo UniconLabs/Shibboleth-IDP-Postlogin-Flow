@@ -68,6 +68,7 @@
             <element id="module-output" name="postlogin" />
           </element>
           <element id="directory" name="lib">
+            <element id="library" level="project" name="Maven: joda-time:joda-time:2.0" />
             <element id="library" level="project" name="Maven: log4j:log4j:1.2.16" />
             <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.6.1" />
             <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.6.1" />
@@ -91,7 +92,6 @@
             <element id="library" level="project" name="Maven: commons-fileupload:commons-fileupload:1.2.1" />
             <element id="library" level="project" name="Maven: javax.servlet.jsp.jstl:jstl-api:1.2" />
             <element id="library" level="project" name="Maven: org.glassfish.web:jstl-impl:1.2" />
-            <element id="library" level="project" name="Maven: joda-time:joda-time:1.6" />
             <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.4" />
             <element id="library" level="project" name="Maven: org.springframework.webflow:spring-binding:2.0.9.RELEASE" />
             <element id="library" level="project" name="Maven: org.springframework.webflow:spring-js:2.0.9.RELEASE" />
@@ -288,15 +288,15 @@
         <root url="jar://$MAVEN_REPOSITORY$/javax/servlet/servlet-api/2.5/servlet-api-2.5-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: joda-time:joda-time:1.6">
+    <library name="Maven: joda-time:joda-time:2.0">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/joda-time/joda-time/1.6/joda-time-1.6.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/joda-time/joda-time/2.0/joda-time-2.0.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/joda-time/joda-time/1.6/joda-time-1.6-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/joda-time/joda-time/2.0/joda-time-2.0-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/joda-time/joda-time/1.6/joda-time-1.6-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/joda-time/joda-time/2.0/joda-time-2.0-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: junit:junit:4.8.2">
