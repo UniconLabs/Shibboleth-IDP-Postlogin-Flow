@@ -14,7 +14,10 @@
     <bean id="termsOfUseAgreementService"
           class="edu.internet2.middleware.shibboleth.idp.postlogin.InMemoryTermsOfUseAgreementService">
         <constructor-arg index="0">
-            <bean class="edu.internet2.middleware.shibboleth.idp.postlogin.NeverExpired"/>
+            <bean class="edu.internet2.middleware.shibboleth.idp.postlogin.PeriodBasedTermsOfUseAcceptanceExpirationStrategy">
+                <constructor-arg index="0" value="SECONDS"/>
+                <constructor-arg index="1" value="30"/>
+            </bean>
         </constructor-arg>
         <constructor-arg index="1">
             <util:map map-class="java.util.concurrent.ConcurrentHashMap">
