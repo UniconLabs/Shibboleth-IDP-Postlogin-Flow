@@ -6,19 +6,16 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Simple in-memory implementation useful for testing
+ * Simple in-memory implementation. Useful for mocking and testing.
  */
-public class InMemoryTermsOfUseAgreementService  implements TermsOfUseAgreementService {
-
+public class InMemoryTermsOfUseAgreementService  extends AbstractTermsOfUseAgreementService {
 
     private Map<String, AuthenticatedPrincipal> users = new ConcurrentHashMap<String, AuthenticatedPrincipal>();
 
-    private TermsOfUseAcceptanceExpirationStrategy expirationStrategy;
-
     public InMemoryTermsOfUseAgreementService(TermsOfUseAcceptanceExpirationStrategy expirationStrategy) {
-        this.expirationStrategy = expirationStrategy;
+        super(expirationStrategy);
         //Just hardcode. Use the other ctor to parametarize the users Map via applicationContext
-        AuthenticatedPrincipal user = new AuthenticatedPrincipal("ip-user");
+        AuthenticatedPrincipal user = new AuthenticatedPrincipal("ip-user", new TermsOfUseAgreement("NONE_TAKEN", 0L));
         users.put("ip-user", user);
     }
 
@@ -28,35 +25,21 @@ public class InMemoryTermsOfUseAgreementService  implements TermsOfUseAgreementS
      * @param users
      */
     public InMemoryTermsOfUseAgreementService(TermsOfUseAcceptanceExpirationStrategy expirationStrategy, Map<String, AuthenticatedPrincipal> users) {
-        this.expirationStrategy = expirationStrategy;
+        super(expirationStrategy);
         this.users = users;
     }
 
     @Override
-    public boolean requiresToActOnAgreement(String principalName) throws NoSuchPrincipalException {
-        AuthenticatedPrincipal user = getUser(principalName);
-        return user.getTermsOfUseAgreement().actionIsNeeded(this.expirationStrategy);
-    }
-
-    @Override
-    public void acceptAgreement(String principalName) throws NoSuchPrincipalException {
-        AuthenticatedPrincipal user = getUser(principalName);
-        user.getTermsOfUseAgreement().accept();
-        this.users.put(principalName, user);
-    }
-
-    @Override
-    public void rejectAgreement(String principalName) throws NoSuchPrincipalException {
-        AuthenticatedPrincipal user = getUser(principalName);
-        user.getTermsOfUseAgreement().reject();
-        this.users.put(principalName, user);
-    }
-
-    private AuthenticatedPrincipal getUser(String name) {
+    protected AuthenticatedPrincipal findUser(String name) {
         AuthenticatedPrincipal user = this.users.get(name);
         if(user == null) {
             throw new NoSuchPrincipalException("The principal [" + name + "] is not found.");
         }
         return user;
+    }
+
+    @Override
+    protected void saveUser(AuthenticatedPrincipal user) {
+        this.users.put(user.getName(), user);
     }
 }

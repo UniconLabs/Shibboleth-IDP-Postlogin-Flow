@@ -14,8 +14,12 @@ public class AuthenticatedPrincipal implements Serializable {
     private TermsOfUseAgreement termsOfUseAgreement;
 
     public AuthenticatedPrincipal(String name) {
+        this(name, new TermsOfUseAgreement("NONE_TAKEN", 0L));
+    }
+
+    public AuthenticatedPrincipal(String name, TermsOfUseAgreement termsOfUseAgreement) {
         this.name = name;
-        this.termsOfUseAgreement = new TermsOfUseAgreement(this);
+        this.termsOfUseAgreement = termsOfUseAgreement;
     }
 
     public String getName() {

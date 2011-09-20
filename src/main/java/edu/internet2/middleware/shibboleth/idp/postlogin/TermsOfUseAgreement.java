@@ -20,10 +20,12 @@ public class TermsOfUseAgreement implements Serializable {
 
     private Date termsAcceptanceDate;
 
-    private AuthenticatedPrincipal user;
 
-    public TermsOfUseAgreement(AuthenticatedPrincipal user) {
-        this.user = user;
+    public TermsOfUseAgreement(String actionTaken, long timestamp) {
+        this.action = Action.valueOf(actionTaken);
+        if (timestamp > 0L) {
+            this.termsAcceptanceDate = new Date(timestamp);
+        }
     }
 
     public void accept() {
