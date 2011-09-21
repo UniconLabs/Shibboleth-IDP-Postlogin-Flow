@@ -1,4 +1,4 @@
-package edu.internet2.middleware.shibboleth.idp.postlogin.common;
+package edu.internet2.middleware.shibboleth.idp.postlogin.acceptance;
 
 import java.io.Serializable;
 import java.util.Date;

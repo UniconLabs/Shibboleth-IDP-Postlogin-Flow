@@ -22,32 +22,28 @@
 
 
 
-    <bean id="termsOfUseAgreementService"
-          class="edu.internet2.middleware.shibboleth.idp.postlogin.termsofuse.JdbcTermsOfUseAgreementService">
+    <bean id="termsOfUseAgreementAcceptance"
+          class="edu.internet2.middleware.shibboleth.idp.postlogin.acceptance.JdbcAcceptanceStore">
         <constructor-arg index="0">
-            <bean class="edu.internet2.middleware.shibboleth.idp.postlogin.common.PeriodBasedAcceptanceExpirationStrategy">
+            <bean class="edu.internet2.middleware.shibboleth.idp.postlogin.acceptance.PeriodBasedAcceptanceExpirationStrategy">
                 <constructor-arg index="0" value="SECONDS"/>
                 <constructor-arg index="1" value="30"/>
             </bean>
         </constructor-arg>
         <constructor-arg index="1" ref="dataSource"/>
+        <constructor-arg index="2" value="users_tou"/>
     </bean>
 
-    <!-- <bean id="termsOfUseAgreementService"
-          class="edu.internet2.middleware.shibboleth.idp.postlogin.common.InMemoryAcceptanceService  <constructor-arg index="0">
-            <bean class="edu.internet2.middleware.shibboleth.idp.postlogin.common.PeriodBasedAcceptanceExpirationStrategy         <constructor-arg index="0" value="SECONDS"/>
+    <bean id="attributesReleaseAcceptance"
+          class="edu.internet2.middleware.shibboleth.idp.postlogin.acceptance.JdbcAcceptanceStore">
+        <constructor-arg index="0">
+            <bean class="edu.internet2.middleware.shibboleth.idp.postlogin.acceptance.PeriodBasedAcceptanceExpirationStrategy">
+                <constructor-arg index="0" value="SECONDS"/>
                 <constructor-arg index="1" value="30"/>
             </bean>
         </constructor-arg>
-        <constructor-arg index="1">
-            <util:map map-class="java.util.concurrent.ConcurrentHashMap">
-                <entry key="ip-user">
-                    <bean class="edu.internet2.middleware.shibboleth.idp.postlogin.common.AuthenticatedPrincipal">
-                        <constructor-arg value="ip-user"/>
-                    </bean>
-                </entry>
-            </util:map>
-        </constructor-arg>
-    </bean> -->
+        <constructor-arg index="1" ref="dataSource"/>
+        <constructor-arg index="2" value="users_attr_release_consent"/>
+    </bean>
 
 </beans>

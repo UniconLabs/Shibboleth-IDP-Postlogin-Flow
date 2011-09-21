@@ -1,6 +1,4 @@
-package edu.internet2.middleware.shibboleth.idp.postlogin.common;
-
-import edu.internet2.middleware.shibboleth.idp.postlogin.common.AcceptanceExpirationStrategy;
+package edu.internet2.middleware.shibboleth.idp.postlogin.acceptance;
 
 import java.util.Date;
 

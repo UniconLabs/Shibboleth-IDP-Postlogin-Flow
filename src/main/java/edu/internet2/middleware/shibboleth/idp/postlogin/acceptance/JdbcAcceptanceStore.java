@@ -1,10 +1,6 @@
-package edu.internet2.middleware.shibboleth.idp.postlogin.termsofuse;
+package edu.internet2.middleware.shibboleth.idp.postlogin.acceptance;
 
 import edu.internet2.middleware.shibboleth.idp.postlogin.NoSuchPrincipalException;
-import edu.internet2.middleware.shibboleth.idp.postlogin.common.AbstractAcceptanceService;
-import edu.internet2.middleware.shibboleth.idp.postlogin.common.Acceptance;
-import edu.internet2.middleware.shibboleth.idp.postlogin.common.AuthenticatedPrincipal;
-import edu.internet2.middleware.shibboleth.idp.postlogin.common.AcceptanceExpirationStrategy;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 
@@ -13,20 +9,27 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Stores user's terms of use agreement acceptance data in RDBMS
+ * Stores/retrieves user's acceptance data in/from RDBMS
+ * <p/>
+ * <p>The data structure of acceptance is the same, but only varies on the RDBMS tables where it's stored</p>
+ *
+ * @author Dmitriy Kopylenko
  */
-public class JdbcTermsOfUseAgreementService extends AbstractAcceptanceService {
+public class JdbcAcceptanceStore extends AbstractAcceptanceService {
 
     SimpleJdbcTemplate jdbcTemplate;
 
-    public JdbcTermsOfUseAgreementService(AcceptanceExpirationStrategy expirationStrategy, DataSource dataSource) {
+    String tableName;
+
+    public JdbcAcceptanceStore(AcceptanceExpirationStrategy expirationStrategy, DataSource dataSource, String tableName) {
         super(expirationStrategy);
         this.jdbcTemplate = new SimpleJdbcTemplate(dataSource);
+        this.tableName = tableName;
     }
 
     @Override
-    protected AuthenticatedPrincipal findTermsOfUseAgreementAcceptance(String principalName) throws NoSuchPrincipalException {
-        return this.jdbcTemplate.queryForObject("select * from users_tou where user_name = ?",
+    protected AuthenticatedPrincipal findUserAcceptance(String principalName) throws NoSuchPrincipalException {
+        return this.jdbcTemplate.queryForObject("select * from " + this.tableName + " where user_name = ?",
                 new RowMapper<AuthenticatedPrincipal>() {
                     @Override
                     public AuthenticatedPrincipal mapRow(ResultSet rs, int i) throws SQLException {
@@ -39,8 +42,8 @@ public class JdbcTermsOfUseAgreementService extends AbstractAcceptanceService {
     }
 
     @Override
-    protected void saveTermsOfUseAgreementAcceptance(AuthenticatedPrincipal user) {
-        this.jdbcTemplate.update("update users_tou set acceptance_action = ?, acceptance_timestamp = ? where user_name = ?",
+    protected void saveUserAcceptance(AuthenticatedPrincipal user) {
+        this.jdbcTemplate.update("update " + this.tableName + " set acceptance_action = ?, acceptance_timestamp = ? where user_name = ?",
                 user.getAcceptance().getActionAsString(), user.getAcceptance().getAcceptanceTimestamp(), user.getName());
     }
 }

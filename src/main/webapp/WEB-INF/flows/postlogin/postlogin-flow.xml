@@ -25,19 +25,19 @@
     </view-state>
 
     <decision-state id="checkTermsOfUse">
-        <if test="termsOfUseAgreementService.requiresToActOnAgreement(idpData.principal)" then="termsOfUse"
+        <if test="termsOfUseAgreementAcceptance.requiresToAct(idpData.principal)" then="termsOfUse"
             else="continue"/>
     </decision-state>
 	
 	<view-state id="termsOfUse" view="termsOfUse.jsp">
         <transition on="termsOfUseAgree" to="recordTermsOfUseAcceptance"/>
         <transition on="termsOfUseDisagree" to="disagreedWithTermsOfUse">
-            <evaluate expression="termsOfUseAgreementService.rejectAgreement(idpData.principal)"/>
+            <evaluate expression="termsOfUseAgreementAcceptance.reject(idpData.principal)"/>
         </transition>
     </view-state>
 
     <action-state id="recordTermsOfUseAcceptance">
-        <evaluate expression="termsOfUseAgreementService.acceptAgreement(idpData.principal)"/>
+        <evaluate expression="termsOfUseAgreementAcceptance.accept(idpData.principal)"/>
         <transition to="continue"/>
     </action-state>
     
