@@ -18,13 +18,13 @@ public abstract class AbstractTermsOfUseAgreementService implements TermsOfUseAg
     }
 
     @Override
-    public boolean requiresToActOnAgreement(String principalName) throws NoSuchPrincipalException {
+    public final boolean requiresToActOnAgreement(String principalName) throws NoSuchPrincipalException {
         AuthenticatedPrincipal user = findUser(principalName);
         return user.getTermsOfUseAgreement().actionIsNeeded(this.expirationStrategy);
     }
 
     @Override
-    public void acceptAgreement(String principalName) throws NoSuchPrincipalException {
+    public final void acceptAgreement(String principalName) throws NoSuchPrincipalException {
         AuthenticatedPrincipal user = findUser(principalName);
         user.getTermsOfUseAgreement().accept();
         saveUser(user);

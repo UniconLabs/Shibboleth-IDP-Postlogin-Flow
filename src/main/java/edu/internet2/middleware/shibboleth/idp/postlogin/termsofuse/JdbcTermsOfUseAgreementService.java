@@ -35,6 +35,7 @@ public class JdbcTermsOfUseAgreementService extends AbstractTermsOfUseAgreementS
 
     @Override
     protected void saveUser(AuthenticatedPrincipal user) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        this.jdbcTemplate.update("update users_tou set acceptance_action = ?, acceptance_timestamp = ? where user_name = ?",
+                user.getTermsOfUseAgreement().getActionAsString(), user.getTermsOfUseAgreement().getAcceptanceTimestamp(), user.getName());
     }
 }

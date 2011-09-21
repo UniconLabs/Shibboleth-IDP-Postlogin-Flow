@@ -47,4 +47,13 @@ public class TermsOfUseAgreement implements Serializable {
         }
         return expirationStrategy.isExpired(this.termsAcceptanceDate);
     }
+
+    /* package scoped */
+    String getActionAsString() {
+        return this.action.toString();
+    }
+
+    long getAcceptanceTimestamp() {
+        return this.termsAcceptanceDate.getTime();
+    }
 }
