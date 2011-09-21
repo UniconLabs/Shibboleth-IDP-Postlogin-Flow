@@ -25,7 +25,7 @@ public class JdbcTermsOfUseAgreementService extends AbstractAcceptanceService {
     }
 
     @Override
-    protected AuthenticatedPrincipal findUser(String principalName) throws NoSuchPrincipalException {
+    protected AuthenticatedPrincipal findTermsOfUseAgreementAcceptance(String principalName) throws NoSuchPrincipalException {
         return this.jdbcTemplate.queryForObject("select * from users_tou where user_name = ?",
                 new RowMapper<AuthenticatedPrincipal>() {
                     @Override
@@ -39,7 +39,7 @@ public class JdbcTermsOfUseAgreementService extends AbstractAcceptanceService {
     }
 
     @Override
-    protected void saveUser(AuthenticatedPrincipal user) {
+    protected void saveTermsOfUseAgreementAcceptance(AuthenticatedPrincipal user) {
         this.jdbcTemplate.update("update users_tou set acceptance_action = ?, acceptance_timestamp = ? where user_name = ?",
                 user.getAcceptance().getActionAsString(), user.getAcceptance().getAcceptanceTimestamp(), user.getName());
     }

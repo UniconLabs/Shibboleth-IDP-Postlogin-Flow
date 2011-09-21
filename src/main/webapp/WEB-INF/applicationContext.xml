@@ -34,8 +34,7 @@
     </bean>
 
     <!-- <bean id="termsOfUseAgreementService"
-          class="edu.internet2.middleware.shibboleth.idp.postlogin.termsofuse.InMemoryTermsOfUseAgreementService">
-        <constructor-arg index="0">
+          class="edu.internet2.middleware.shibboleth.idp.postlogin.common.InMemoryAcceptanceService  <constructor-arg index="0">
             <bean class="edu.internet2.middleware.shibboleth.idp.postlogin.common.PeriodBasedAcceptanceExpirationStrategy         <constructor-arg index="0" value="SECONDS"/>
                 <constructor-arg index="1" value="30"/>
             </bean>
