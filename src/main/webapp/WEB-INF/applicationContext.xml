@@ -25,7 +25,7 @@
     <bean id="termsOfUseAgreementService"
           class="edu.internet2.middleware.shibboleth.idp.postlogin.termsofuse.JdbcTermsOfUseAgreementService">
         <constructor-arg index="0">
-            <bean class="edu.internet2.middleware.shibboleth.idp.postlogin.termsofuse.PeriodBasedTermsOfUseAcceptanceExpirationStrategy">
+            <bean class="edu.internet2.middleware.shibboleth.idp.postlogin.common.PeriodBasedAcceptanceExpirationStrategy">
                 <constructor-arg index="0" value="SECONDS"/>
                 <constructor-arg index="1" value="30"/>
             </bean>
@@ -36,15 +36,14 @@
     <!-- <bean id="termsOfUseAgreementService"
           class="edu.internet2.middleware.shibboleth.idp.postlogin.termsofuse.InMemoryTermsOfUseAgreementService">
         <constructor-arg index="0">
-            <bean class="edu.internet2.middleware.shibboleth.idp.postlogin.termsofuse.PeriodBasedTermsOfUseAcceptanceExpirationStrategy">
-                <constructor-arg index="0" value="SECONDS"/>
+            <bean class="edu.internet2.middleware.shibboleth.idp.postlogin.common.PeriodBasedAcceptanceExpirationStrategy         <constructor-arg index="0" value="SECONDS"/>
                 <constructor-arg index="1" value="30"/>
             </bean>
         </constructor-arg>
         <constructor-arg index="1">
             <util:map map-class="java.util.concurrent.ConcurrentHashMap">
                 <entry key="ip-user">
-                    <bean class="edu.internet2.middleware.shibboleth.idp.postlogin.termsofuse.AuthenticatedPrincipal">
+                    <bean class="edu.internet2.middleware.shibboleth.idp.postlogin.common.AuthenticatedPrincipal">
                         <constructor-arg value="ip-user"/>
                     </bean>
                 </entry>

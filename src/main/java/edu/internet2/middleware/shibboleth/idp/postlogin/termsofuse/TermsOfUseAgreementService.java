@@ -1,5 +1,7 @@
 package edu.internet2.middleware.shibboleth.idp.postlogin.termsofuse;
 
+import edu.internet2.middleware.shibboleth.idp.postlogin.NoSuchPrincipalException;
+
 /**
  * Domain service API defining operations pertaining to terms of use agreement
  *

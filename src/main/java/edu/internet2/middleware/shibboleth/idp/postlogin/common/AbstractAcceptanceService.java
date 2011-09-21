@@ -1,4 +1,9 @@
-package edu.internet2.middleware.shibboleth.idp.postlogin.termsofuse;
+package edu.internet2.middleware.shibboleth.idp.postlogin.common;
+
+import edu.internet2.middleware.shibboleth.idp.postlogin.NoSuchPrincipalException;
+import edu.internet2.middleware.shibboleth.idp.postlogin.common.AuthenticatedPrincipal;
+import edu.internet2.middleware.shibboleth.idp.postlogin.common.AcceptanceExpirationStrategy;
+import edu.internet2.middleware.shibboleth.idp.postlogin.termsofuse.TermsOfUseAgreementService;
 
 /**
  * Base abstract class defining the main implementation workflow.
@@ -9,31 +14,31 @@ package edu.internet2.middleware.shibboleth.idp.postlogin.termsofuse;
  *
  * @author Dmitriy Kopylenko
  */
-public abstract class AbstractTermsOfUseAgreementService implements TermsOfUseAgreementService {
+public abstract class AbstractAcceptanceService implements TermsOfUseAgreementService {
 
-    TermsOfUseAcceptanceExpirationStrategy expirationStrategy;
+    AcceptanceExpirationStrategy expirationStrategy;
 
-    protected AbstractTermsOfUseAgreementService(TermsOfUseAcceptanceExpirationStrategy expirationStrategy) {
+    protected AbstractAcceptanceService(AcceptanceExpirationStrategy expirationStrategy) {
         this.expirationStrategy = expirationStrategy;
     }
 
     @Override
     public final boolean requiresToActOnAgreement(String principalName) throws NoSuchPrincipalException {
         AuthenticatedPrincipal user = findUser(principalName);
-        return user.getTermsOfUseAgreement().actionIsNeeded(this.expirationStrategy);
+        return user.getAcceptance().actionIsNeeded(this.expirationStrategy);
     }
 
     @Override
     public final void acceptAgreement(String principalName) throws NoSuchPrincipalException {
         AuthenticatedPrincipal user = findUser(principalName);
-        user.getTermsOfUseAgreement().accept();
+        user.getAcceptance().accept();
         saveUser(user);
     }
 
     @Override
     public void rejectAgreement(String principalName) throws NoSuchPrincipalException {
         AuthenticatedPrincipal user = findUser(principalName);
-        user.getTermsOfUseAgreement().reject();
+        user.getAcceptance().reject();
         saveUser(user);
     }
 

@@ -1,4 +1,4 @@
-package edu.internet2.middleware.shibboleth.idp.postlogin.termsofuse;
+package edu.internet2.middleware.shibboleth.idp.postlogin.common;
 
 import org.joda.time.*;
 import org.joda.time.base.BaseSingleFieldPeriod;
@@ -14,7 +14,7 @@ import java.util.Date;
  *
  * @author Dmitriy Kopylenko
  */
-public class PeriodBasedTermsOfUseAcceptanceExpirationStrategy implements TermsOfUseAcceptanceExpirationStrategy {
+public class PeriodBasedAcceptanceExpirationStrategy implements AcceptanceExpirationStrategy {
 
     public static enum PeriodType {
         SECONDS,
@@ -30,35 +30,35 @@ public class PeriodBasedTermsOfUseAcceptanceExpirationStrategy implements TermsO
 
     private int expirationTreshold;
 
-    public PeriodBasedTermsOfUseAcceptanceExpirationStrategy(PeriodType periodType, int expirationTreshold) {
+    public PeriodBasedAcceptanceExpirationStrategy(PeriodType periodType, int expirationTreshold) {
         this.periodType = periodType;
         this.expirationTreshold = expirationTreshold;
     }
 
     @Override
-    public boolean isExpired(Date termsOfUseAcceptanceDate) throws IllegalArgumentException {
+    public boolean isExpired(Date acceptanceDate) throws IllegalArgumentException {
         BaseSingleFieldPeriod period = null;
         switch (this.periodType) {
             case SECONDS:
-                period = Seconds.secondsBetween(new DateTime(termsOfUseAcceptanceDate), DateTime.now());
+                period = Seconds.secondsBetween(new DateTime(acceptanceDate), DateTime.now());
                 break;
             case MINUTES:
-                period = Minutes.minutesBetween(new DateTime(termsOfUseAcceptanceDate), DateTime.now());
+                period = Minutes.minutesBetween(new DateTime(acceptanceDate), DateTime.now());
                 break;
             case HOURS:
-                period = Hours.hoursBetween(new DateTime(termsOfUseAcceptanceDate), DateTime.now());
+                period = Hours.hoursBetween(new DateTime(acceptanceDate), DateTime.now());
                 break;
             case DAYS:
-                period = Days.daysBetween(new DateTime(termsOfUseAcceptanceDate), DateTime.now());
+                period = Days.daysBetween(new DateTime(acceptanceDate), DateTime.now());
                 break;
             case WEEKS:
-                period = Weeks.weeksBetween(new DateTime(termsOfUseAcceptanceDate), DateTime.now());
+                period = Weeks.weeksBetween(new DateTime(acceptanceDate), DateTime.now());
                 break;
             case MONTHS:
-                period = Months.monthsBetween(new DateTime(termsOfUseAcceptanceDate), DateTime.now());
+                period = Months.monthsBetween(new DateTime(acceptanceDate), DateTime.now());
                 break;
             case YEARS:
-                period = Years.yearsBetween(new DateTime(termsOfUseAcceptanceDate), DateTime.now());
+                period = Years.yearsBetween(new DateTime(acceptanceDate), DateTime.now());
                 break;
         }
         return period.getValue(0) >= this.expirationTreshold;
