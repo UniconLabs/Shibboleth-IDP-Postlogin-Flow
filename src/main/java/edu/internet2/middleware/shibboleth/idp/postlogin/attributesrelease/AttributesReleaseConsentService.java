@@ -11,5 +11,8 @@ public interface AttributesReleaseConsentService {
 
     boolean requiresToActOnAttributesReleaseConsent(String principalName, String ferpaValue) throws NoSuchPrincipalException;
 
+    void acceptAttributesRelease(String principalName) throws NoSuchPrincipalException;
+
+    void rejectAttributesRelease(String principalName) throws NoSuchPrincipalException;
 
 }
