@@ -37,6 +37,9 @@ public class PeriodBasedAcceptanceExpirationStrategy implements AcceptanceExpira
 
     @Override
     public boolean isExpired(Date acceptanceDate) throws IllegalArgumentException {
+        if(acceptanceDate == null) {
+            throw new IllegalArgumentException("The acceptanceDate cannot be null");
+        }
         BaseSingleFieldPeriod period = null;
         switch (this.periodType) {
             case SECONDS:
