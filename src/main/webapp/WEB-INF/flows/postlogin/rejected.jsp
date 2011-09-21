@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Terms of use</title>
+    <title>IDP Post Login</title>
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -38,26 +38,9 @@
 </div>
 
 <div class="container">
-
-    <div class="page-header">
-        <h2>
-            Terms of use
-        </h2>
-    </div>
     <div class="alert-message block-message info">
-        <p>
-            Please review the Terms of Use Agreement and either accept or reject it.
-        </p>
-
-        <div class="alert-actions">
-            <form method="post">
-                <input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}"/>
-                <input class="btn primary" type="submit" id="acceptTermsOfUse" name="_eventId_acceptTermsOfUse"
-                       value="Agree"/>
-                <input class="btn" type="submit" id="rejectTermsOfUse" name="_eventId_rejectTermsOfUse"
-                       value="Disagree"/>
-            </form>
-        </div>
+        <strong><span class="label important">Important</span>
+        <p>You cannot continue until you accept. Use browser's back button.</strong></p>
     </div>
 
 </div>

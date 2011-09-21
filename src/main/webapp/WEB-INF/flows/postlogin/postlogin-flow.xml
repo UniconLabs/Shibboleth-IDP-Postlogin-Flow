@@ -9,6 +9,7 @@
         <set name="flowScope.idpData" value="externalContext.requestMap.idpData"/>
     </on-start>
 
+    <!-- Main checks -->
     <decision-state id="checkRelyingParty">
         <if test="idpData.relyingPartyId.equals('https://sp.example.org/shibboleth')" then="checkGoogleEntitlement" else="continue"/>
     </decision-state>
@@ -18,20 +19,23 @@
             then="continue" else="unauthorized"/>
     </decision-state>
 
+    <!-- Just a debug view state to manually drive the flow during development -->
     <view-state id="debug" view="debugFlow.jsp">
         <transition on="unauthorized" to="unauthorized"/>
         <transition on="continue" to="continue"/>
 		<transition on="termsOfUse" to="checkTermsOfUse"/>
+        <transition on="attributesRelease" to="checkFerpa"/>
     </view-state>
 
+    <!-- Terms of use checks -->
     <decision-state id="checkTermsOfUse">
         <if test="termsOfUseAgreementAcceptance.requiresToAct(idpData.principal)" then="termsOfUse"
             else="continue"/>
     </decision-state>
 	
 	<view-state id="termsOfUse" view="termsOfUse.jsp">
-        <transition on="termsOfUseAgree" to="recordTermsOfUseAcceptance"/>
-        <transition on="termsOfUseDisagree" to="disagreedWithTermsOfUse">
+        <transition on="acceptTermsOfUse" to="recordTermsOfUseAcceptance"/>
+        <transition on="rejectTermsOfUse" to="rejected">
             <evaluate expression="termsOfUseAgreementAcceptance.reject(idpData.principal)"/>
         </transition>
     </view-state>
@@ -40,8 +44,31 @@
         <evaluate expression="termsOfUseAgreementAcceptance.accept(idpData.principal)"/>
         <transition to="continue"/>
     </action-state>
+
+    <!-- Attributes release checks -->
+    <decision-state id="checkFerpa">
+        <if test="idpData.attributes.ferpa.contains('yes')"
+            then="checkAttributeRelease" else="continue"/>
+    </decision-state>
+
+    <decision-state id="checkAttributeRelease">
+        <if test="attributesReleaseAcceptance.requiresToAct(idpData.principal)" then="attributesRelease"
+            else="continue"/>
+    </decision-state>
+
+	<view-state id="attributesRelease" view="attributesRelease.jsp">
+        <transition on="acceptAttributesRelease" to="recordAttributesReleaseAcceptance"/>
+        <transition on="rejectAttributesRelease" to="rejected">
+            <evaluate expression="attributesReleaseAcceptance.reject(idpData.principal)"/>
+        </transition>
+    </view-state>
+
+    <action-state id="recordAttributesReleaseAcceptance">
+        <evaluate expression="attributesReleaseAcceptance.accept(idpData.principal)"/>
+        <transition to="continue"/>
+    </action-state>
     
-    <view-state id="disagreedWithTermsOfUse" view="disagreedWithTermsOfUse.jsp">
+    <view-state id="rejected" view="rejected.jsp">
         <transition on="back" to="termsOfUse"/>
     </view-state>
 

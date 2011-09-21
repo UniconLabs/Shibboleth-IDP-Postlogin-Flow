@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>IDP Post Login</title>
+    <title>Terms of use</title>
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -38,15 +38,24 @@
 </div>
 
 <div class="container">
+
+    <div class="page-header">
+        <h2>
+            Attributes Release Consent
+        </h2>
+    </div>
     <div class="alert-message block-message info">
-        <strong><span class="label important">Important</span>
-        <p>You have disagreed with the Terms of Use. You cannot continue until you do so.</strong></p>
+        <p>
+            Please either accept or reject to release FERPA protected attributes.
+        </p>
 
         <div class="alert-actions">
             <form method="post">
                 <input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}"/>
-                <input class="btn" type="submit" id="back" name="_eventId_back"
-                       value="&laquo; Go back"/>
+                <input class="btn primary" type="submit" id="acceptAttributesRelease" name="_eventId_acceptAttributesRelease"
+                       value="Accept"/>
+                <input class="btn" type="submit" id="rejectAttributesRelease" name="_eventId_rejectAttributesRelease"
+                       value="Reject"/>
             </form>
         </div>
     </div>

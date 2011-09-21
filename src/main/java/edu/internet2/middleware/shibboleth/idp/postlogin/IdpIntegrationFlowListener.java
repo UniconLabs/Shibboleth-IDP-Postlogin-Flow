@@ -20,7 +20,7 @@ public class IdpIntegrationFlowListener extends FlowExecutionListenerAdapter {
         String status = null;
         if ("continue".equals(state.getId())) {
             status = "POST_LOGIN_FLOW_CONTINUE";
-        } else if ("unauthorized".equals(state.getId()) || "disagreedWithTermsOfUse".equals(state.getId())) {
+        } else if ("unauthorized".equals(state.getId()) || "rejected".equals(state.getId())) {
             status = "POST_LOGIN_FLOW_STOP";
         }
         if (status == null) {
@@ -41,7 +41,7 @@ public class IdpIntegrationFlowListener extends FlowExecutionListenerAdapter {
     public void stateEntered(RequestContext context, StateDefinition previousState, StateDefinition newState) {
         //This is our start state. Mark the status as 'in progress', so the IDP (integration filter) could check
         // and stop processing if malicios or accidental attempt is made to redirect to IDP in the middle of this flow.
-        if ("checkRelyingParty".equals(newState.getId())) {
+        if ("checkRelyingParty".equals(newState.getId()) || "debug".equals(newState.getId())) {
             CallingContextNameAndSessionId nameAndSessionId = extractFrom(context);
             ServletContext servletContext = (ServletContext) context.getExternalContext().getNativeContext();
             ServletContext callingContext = servletContext.getContext(nameAndSessionId.name);
