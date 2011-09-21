@@ -1,6 +1,4 @@
-package edu.internet2.middleware.shibboleth.idp.postlogin;
-
-import com.sun.tools.corba.se.idl.Noop;
+package edu.internet2.middleware.shibboleth.idp.postlogin.termsofuse;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

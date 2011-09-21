@@ -1,4 +1,4 @@
-package edu.internet2.middleware.shibboleth.idp.postlogin;
+package edu.internet2.middleware.shibboleth.idp.postlogin.termsofuse;
 
 import org.joda.time.*;
 import org.joda.time.base.BaseSingleFieldPeriod;

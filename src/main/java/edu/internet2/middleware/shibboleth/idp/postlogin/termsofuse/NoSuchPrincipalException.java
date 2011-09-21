@@ -1,4 +1,4 @@
-package edu.internet2.middleware.shibboleth.idp.postlogin;
+package edu.internet2.middleware.shibboleth.idp.postlogin.termsofuse;
 
 /**
  * Indicates that principal is not found in the local data store

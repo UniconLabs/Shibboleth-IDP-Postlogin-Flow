@@ -1,4 +1,4 @@
-package edu.internet2.middleware.shibboleth.idp.postlogin;
+package edu.internet2.middleware.shibboleth.idp.postlogin.termsofuse;
 
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
@@ -6,7 +6,6 @@ import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 
 /**
  * Stores user's terms of use agreement acceptance data in RDBMS
