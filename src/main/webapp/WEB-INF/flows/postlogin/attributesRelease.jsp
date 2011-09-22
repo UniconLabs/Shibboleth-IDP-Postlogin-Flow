@@ -53,34 +53,10 @@
         <tbody>
         <tr>
             <td>
-                <h3>Return URL:</h3>
-            </td>
-            <td>
-                <strong>${idp.returnUrl}</strong>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <h3>Relying Party ID:</h3>
-            </td>
-            <td>
-                <strong>${relyingParty.id}</strong>
-            </td>
-        </tr>
-        <tr>
-            <td>
                 <h3>Attributes:</h3>
             </td>
             <td>
-                <strong>${user.attributes.eduPersonAffiliation[0]}</strong>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <h3>Calling Session ID:</h3>
-            </td>
-            <td>
-                <strong>${idp.callingSessionId}</strong>
+                <strong>${user.attributes}</strong>
             </td>
         </tr>
         </tbody>

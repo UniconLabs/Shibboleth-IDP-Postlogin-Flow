@@ -12,15 +12,34 @@
         http://www.springframework.org/schema/util/spring-util-2.5.xsd">
 
 
+
+    <bean id="termsOfUseAgreementAcceptance"
+          class="edu.internet2.middleware.shibboleth.idp.postlogin.acceptance.InMemoryAcceptanceStore">
+        <constructor-arg index="0">
+            <bean class="edu.internet2.middleware.shibboleth.idp.postlogin.acceptance.PeriodBasedAcceptanceExpirationStrategy">
+                <constructor-arg index="0" value="MINUTES"/>
+                <constructor-arg index="1" value="1"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <bean id="attributesReleaseAcceptance"
+          class="edu.internet2.middleware.shibboleth.idp.postlogin.acceptance.InMemoryAcceptanceStore">
+        <constructor-arg index="0">
+            <bean class="edu.internet2.middleware.shibboleth.idp.postlogin.acceptance.PeriodBasedAcceptanceExpirationStrategy">
+                <constructor-arg index="0" value="MINUTES"/>
+                <constructor-arg index="1" value="1"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+
     <!-- Just for prototyping. Externalize and use connection pooling in production settings -->
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <!--<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://localhost/idp_postlogin_db"/>
         <property name="username" value="plf"/>
         <property name="password" value="plf"/>
     </bean>
-
-
 
     <bean id="termsOfUseAgreementAcceptance"
           class="edu.internet2.middleware.shibboleth.idp.postlogin.acceptance.JdbcAcceptanceStore">
@@ -44,6 +63,6 @@
         </constructor-arg>
         <constructor-arg index="1" ref="dataSource"/>
         <constructor-arg index="2" value="users_attr_release_consent"/>
-    </bean>
+    </bean> -->
 
 </beans>
