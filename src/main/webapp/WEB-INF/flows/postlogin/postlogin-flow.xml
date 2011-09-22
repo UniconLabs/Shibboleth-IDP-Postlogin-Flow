@@ -26,7 +26,7 @@
         <transition on="unauthorized" to="unauthorized"/>
         <transition on="continue" to="continue"/>
 		<transition on="termsOfUse" to="checkTermsOfUse"/>
-        <transition on="attributesRelease" to="checkFerpa"/>
+        <transition on="attributesRelease" to="checkAttributeRelease"/>
     </view-state>
 
     <!-- Terms of use checks -->
@@ -48,10 +48,10 @@
     </action-state>
 
     <!-- Attributes release checks -->
-    <decision-state id="checkFerpa">
+    <!--<decision-state id="checkFerpa">
         <if test="user.attributes.ferpa.contains('yes')"
             then="checkAttributeRelease" else="continue"/>
-    </decision-state>
+    </decision-state> -->
 
     <decision-state id="checkAttributeRelease">
         <if test="attributesReleaseAcceptance.requiresToAct(user.name)" then="attributesRelease"
