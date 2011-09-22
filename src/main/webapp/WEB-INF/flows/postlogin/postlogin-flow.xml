@@ -6,16 +6,18 @@
         start-state="debug">
 
     <on-start>
-        <set name="flowScope.idpData" value="externalContext.requestMap.idpData"/>
+        <set name="flowScope.relyingParty" value="externalContext.requestMap.relyingParty"/>
+        <set name="flowScope.user" value="externalContext.requestMap.user"/>
+        <set name="flowScope.idp" value="externalContext.requestMap.idp"/>
     </on-start>
 
     <!-- Main checks -->
     <decision-state id="checkRelyingParty">
-        <if test="idpData.relyingPartyId.equals('https://sp.example.org/shibboleth')" then="checkGoogleEntitlement" else="continue"/>
+        <if test="relyingParty.id.equals('https://sp.example.org/shibboleth')" then="checkGoogleEntitlement" else="continue"/>
     </decision-state>
 
     <decision-state id="checkGoogleEntitlement">
-        <if test="idpData.attributes.eduPersonEntitlement.contains('urn:example.org:entitlement:googleapps')"
+        <if test="user.attributes.eduPersonEntitlement.contains('urn:example.org:entitlement:googleapps')"
             then="continue" else="unauthorized"/>
     </decision-state>
 
@@ -29,51 +31,47 @@
 
     <!-- Terms of use checks -->
     <decision-state id="checkTermsOfUse">
-        <if test="termsOfUseAgreementAcceptance.requiresToAct(idpData.principal)" then="termsOfUse"
+        <if test="termsOfUseAgreementAcceptance.requiresToAct(user.name)" then="termsOfUse"
             else="continue"/>
     </decision-state>
 	
 	<view-state id="termsOfUse" view="termsOfUse.jsp">
         <transition on="acceptTermsOfUse" to="recordTermsOfUseAcceptance"/>
         <transition on="rejectTermsOfUse" to="rejected">
-            <evaluate expression="termsOfUseAgreementAcceptance.reject(idpData.principal)"/>
+            <evaluate expression="termsOfUseAgreementAcceptance.reject(user.name)"/>
         </transition>
     </view-state>
 
     <action-state id="recordTermsOfUseAcceptance">
-        <evaluate expression="termsOfUseAgreementAcceptance.accept(idpData.principal)"/>
+        <evaluate expression="termsOfUseAgreementAcceptance.accept(user.name)"/>
         <transition to="continue"/>
     </action-state>
 
     <!-- Attributes release checks -->
     <decision-state id="checkFerpa">
-        <if test="idpData.attributes.ferpa.contains('yes')"
+        <if test="user.attributes.ferpa.contains('yes')"
             then="checkAttributeRelease" else="continue"/>
     </decision-state>
 
     <decision-state id="checkAttributeRelease">
-        <if test="attributesReleaseAcceptance.requiresToAct(idpData.principal)" then="attributesRelease"
+        <if test="attributesReleaseAcceptance.requiresToAct(user.name)" then="attributesRelease"
             else="continue"/>
     </decision-state>
 
 	<view-state id="attributesRelease" view="attributesRelease.jsp">
         <transition on="acceptAttributesRelease" to="recordAttributesReleaseAcceptance"/>
         <transition on="rejectAttributesRelease" to="rejected">
-            <evaluate expression="attributesReleaseAcceptance.reject(idpData.principal)"/>
+            <evaluate expression="attributesReleaseAcceptance.reject(user.name)"/>
         </transition>
     </view-state>
 
     <action-state id="recordAttributesReleaseAcceptance">
-        <evaluate expression="attributesReleaseAcceptance.accept(idpData.principal)"/>
+        <evaluate expression="attributesReleaseAcceptance.accept(user.name)"/>
         <transition to="continue"/>
     </action-state>
     
-    <view-state id="rejected" view="rejected.jsp">
-        <transition on="back" to="termsOfUse"/>
-    </view-state>
-
+    <view-state id="rejected" view="rejected.jsp"/>
     <end-state id="unauthorized" view="unauthorized.jsp"/>
-
-    <end-state id="continue" view="externalRedirect:${idpData.returnUrl}"/>
+    <end-state id="continue" view="externalRedirect:${idp.returnUrl}"/>
 
 </flow>

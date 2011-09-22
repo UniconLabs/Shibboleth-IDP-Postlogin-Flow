@@ -48,14 +48,14 @@
     </div>
 
 
-    <table id="sortTableExample">
+    <table id="idpData">
         <tbody>
         <tr>
             <td>
                 <h3>Return URL:</h3>
             </td>
             <td>
-                <strong>${idpData.returnUrl}</strong>
+                <strong>${idp.returnUrl}</strong>
             </td>
         </tr>
         <tr>
@@ -63,7 +63,7 @@
                 <h3>Relying Party ID:</h3>
             </td>
             <td>
-                <strong>${idpData.relyingPartyId}</strong>
+                <strong>${relyingParty.id}</strong>
             </td>
         </tr>
         <tr>
@@ -71,7 +71,7 @@
                 <h3>Attributes:</h3>
             </td>
             <td>
-                <strong>${idpData.attributes}</strong>
+                <strong>${user.attributes}</strong>
             </td>
         </tr>
         <tr>
@@ -79,15 +79,11 @@
                 <h3>Calling Session ID:</h3>
             </td>
             <td>
-                <strong>${idpData.callingSessionId}</strong>
+                <strong>${idp.callingSessionId}</strong>
             </td>
         </tr>
         </tbody>
     </table>
-    <!--<h3>Return URL: <small>${idpData.returnUrl}</small></h3>
-			<h3>Relying Party ID: <small>${idpData.relyingPartyId}</small></h3>
-			<h3>Entitelments: <small>${idpData.attributes.eduPersonEntitlement}</small></h3>
-			<h3>Calling Session ID: <small>${idpData.callingSessionId}</small></h3> -->
 
     <form method="post">
         <input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}"/>

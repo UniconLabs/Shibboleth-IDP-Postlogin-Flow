@@ -59,8 +59,9 @@ public class IdpIntegrationFlowListener extends FlowExecutionListenerAdapter {
 
     private CallingContextNameAndSessionId extractFrom(RequestContext ctx) {
         //Java needs native Tuples :-)
-        String name = (String) ((Map) ctx.getFlowScope().get("idpData", Map.class)).get("callingContextName");
-        String sessionId = (String) ((Map) ctx.getFlowScope().get("idpData", Map.class)).get("callingSessionId");
+        //Map idpMap = (Map) ctx.getFlowScope().get("idp", Map.class);
+        String name = (String) ((Map) ctx.getFlowScope().get("idp", Map.class)).get("callingContextName");
+        String sessionId = (String) ((Map) ctx.getFlowScope().get("idp", Map.class)).get("callingSessionId");
         return new CallingContextNameAndSessionId(name, sessionId);
     }
 

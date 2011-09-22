@@ -46,8 +46,45 @@
     </div>
     <div class="alert-message block-message info">
         <p>
-            Please either accept or reject to release FERPA protected attributes.
+            Please either accept or reject to release the following attributes
         </p>
+
+        <table id="idpData">
+        <tbody>
+        <tr>
+            <td>
+                <h3>Return URL:</h3>
+            </td>
+            <td>
+                <strong>${idp.returnUrl}</strong>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h3>Relying Party ID:</h3>
+            </td>
+            <td>
+                <strong>${relyingParty.id}</strong>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h3>Attributes:</h3>
+            </td>
+            <td>
+                <strong>${user.attributes.eduPersonAffiliation[0]}</strong>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h3>Calling Session ID:</h3>
+            </td>
+            <td>
+                <strong>${idp.callingSessionId}</strong>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
         <div class="alert-actions">
             <form method="post">
